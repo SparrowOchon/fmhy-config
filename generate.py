@@ -1,24 +1,10 @@
-# Builds config.json, the source list clients fetch at runtime. Everything is in here: the
-# list you edit is CATEGORIES just below, the rest is the machinery behind it.
-#
-# A category either names its sources in fallback order, or takes every starred source out of an FMHY
-# section. Names are looked up on the two FMHY wiki pages. A source's mirrors are the links FMHY puts
-# right after it as [2] or [Backup], and they are merged from every place that source turns up, so a
-# site sitting under both Stream Aggregators and Multi-Server ends up with all of its mirrors instead
-# of whichever set happened to be found first. A link carrying its own name starts its own source
-# rather than being swallowed as a mirror, which is what keeps 67Movies and 456movie apart. Links
-# that are plainly not sources, a VPN page or a schedule, get dropped. Last, every url is dead
-# checked over a plain TCP connect and the ones that do not answer are moved to the back of their
-# chain, so whatever the app tries first is normally a live host.
+# Builds config.json which is a list of links that support TV streaming natively from FMHY. 
 #
 # Run it with no arguments to write config.json. Pass --check to do all the work and write
 # nothing, which is what you want before a push. Pass --out NAME to write somewhere else. It needs
 # nothing but the standard library.
 #
-# It runs unattended every night, so it is loud when something is actually wrong: it exits non-zero
-# if a page will not load, if a section named below has vanished from FMHY, or if a category comes
-# out empty. When that happens the last file it wrote keeps serving, which beats shipping an empty
-# app. A single source going missing from FMHY is only a warning, since the rest of the list is fine.
+# It runs unattended every night at 5am UTC based on the github action
 
 import concurrent.futures
 import json
