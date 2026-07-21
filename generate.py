@@ -21,7 +21,7 @@ CATEGORIES = [
     },
     {
         "name": "Desi Movies",
-        "items": ["MultiMovies", "Desicinemas", "67Movies", "456movie"],
+        "items": ["Desicinemas", "67Movies", "456movie"],
     },
     {
         "name": "Desi Shows",
