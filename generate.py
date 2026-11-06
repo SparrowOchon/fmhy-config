@@ -21,11 +21,11 @@ CATEGORIES = [
     },
     {
         "name": "Desi Movies",
-        "items": ["Desicinemas", "67Movies", "456movie"],
+        "items": ["Desicinemas", "BollyZone",],
     },
     {
         "name": "Desi Shows",
-        "items": ["Desi Serials"],
+        "items": ["Desi Serials", "desitv"],
     },
     {
         "name": "Anime",
@@ -37,13 +37,14 @@ CATEGORIES = [
     },
     {
         "name": "Live Sports",
-        "items": ["Streamed", "StreamSports99", "SportsBite TV", "StreamFree", "DaddyLive"],
-    },
-    {
-        "name": "Sports Replay",
-        "items": ["StreamSports99", "EasyWebTV", "Famelack", "DaddyLive TV"],
+        "items": ["StreamCorner", "PPV.ST", "zlive"],
     },
 ]
+
+# Entries removed from FMHY that we still want, pinned by hand. FMHY wins if it comes back.
+OVERRIDES = {
+    "desicinemas": ["https://desicinema.pk", "https://desicinema.org"],
+}
 
 WIKI = "https://raw.githubusercontent.com/wiki/fmhy/FMHY/%s.md"
 PAGES = ["Streaming", "Non-Eng"]
@@ -150,6 +151,8 @@ def resolve(entry, chains, where):
     key = entry.strip().lower()
     if key in chains:
         return list(chains[key])
+    if key in OVERRIDES:
+        return list(OVERRIDES[key])
     warn("'%s' (in %s) is not on FMHY right now, skipping it" % (entry, where))
     return []
 
